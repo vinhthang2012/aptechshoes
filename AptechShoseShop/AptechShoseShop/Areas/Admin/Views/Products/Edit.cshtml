@@ -1,0 +1,109 @@
+﻿@model AptechShoseShop.Models.Entites.Product
+
+<h2>Create Product</h2>
+@*@ViewBag.Congra*@
+<div class="row">
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-8">
+        <!-- enctype="multipart/form-data" : thêm cái này mới upload file được-->
+        <form method="post" action="@Url.Action("Create")" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>ProductName</label>
+                <input name="ProductName" class="form-control" value="@Model.ProductName"/>
+            </div>
+            <div class="form-group">
+
+                <label>UnitPrice</label>
+                <input name="UnitPrice" class="form-control" value="@Model.UnitPrice"/>
+            </div>
+            <div class="form-group">
+                <label>Discount Ratio</label>
+                <input name="DiscountRatio" class="form-control" value="@Model.DiscountRatio"/>
+            </div>
+            <div class="form-group">
+                <label>Discount Expiry</label>
+                <input value="@ViewBag.DateExpi" name="DiscountExpiry" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label>Category</label>
+                <select name="CategoryId" class="form-control">
+                    <option>@Model.Category.CategoryName</option>
+                    @foreach (var item in ViewBag.showCate)
+                    {
+                        <option value="@item.Id">@item.CategoryName</option>
+                     }
+                </select>
+            </div>
+
+            @*///truyền ảnh vào*@
+            <div class="form-group">
+                @{ 
+                    string src = "";
+
+                    if (Model.ProductImageId != null)
+                    {
+                        src = "/Data/Products/" + Model.Id + "/" + Model.ProductImage.ImageUrl;
+                    }
+                    else
+                    {
+                        src = "https://www.viettablet.com/images/companies/1/anh3/galaxy-s7-edge-01.jpg";
+                    }
+                }
+                <input src="@src" style="width:200px" name="ProductImageId" type="file" multiple="multiple" />
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+                <textarea name="Description" id="editor" class="form-control">@Model.Description</textarea>
+            </div>
+            <div class="form-group">
+                <label>Created Date</label>
+                <input name="CreatedDate" class="form-control" value="@Model.CreatedDate" />
+            </div>
+            <div class="form-group">
+                <label>Created By</label>
+                <input name="CreatedBy" class="form-control" value="@Model.TbUser.FullName"/>
+            </div>
+            <div class="form-group">
+                <label>Status Product</label>
+                
+                <select name="StatusId" class="form-control">
+                    <option>@Model.StatusProduct.StatusName</option>
+                    @foreach (var item in ViewBag.showStaPro)
+                    {
+                        <option value="@item.Id">@item.StatusName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Size Product</label>
+                ViewBag.showProSize
+                <select name="sizeId" class="form-control">
+                    <option value="">@ViewBag.findProSize</option>
+                    @foreach (var item in ViewBag.showSize)
+                    {
+                        <option value="@item.Id">@item.SizeName</option>
+                    }
+                </select>
+            </div>
+            @*<div class="form-group">
+                <label>Color Product</label>
+                @Html.DropDownList("colorId", (IEnumerable<SelectListItem>)ViewBag.Color, new { @class = "form-control" })
+            </div>*@
+            <div class="form-group">
+                <button class="btn btn-success">Create</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+</div>
+
+@*@Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.cateList, new { @class = "form-control" })*@

@@ -1,0 +1,157 @@
+﻿@model AptechShoseShop.Models.Entites.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName) :  @Html.DisplayFor(model => model.ProductName)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice) : @Html.DisplayFor(model => model.UnitPrice)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountRatio) :  @Html.DisplayFor(model => model.DiscountRatio)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.DiscountRatio)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountExpiry) :  @Html.DisplayFor(model => model.DiscountExpiry)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.DiscountExpiry)
+        </dd>*@
+
+        <dt>
+            Category : @Html.DisplayFor(model => model.Category.CategoryName)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>*@
+        <dt>
+            Color :  @{
+                foreach (var item in ViewBag.ListFindColor)
+                {
+                    @item
+                }
+            }
+        </dt>
+
+        @*<dd>
+            @{
+                foreach (var item in ViewBag.ListFindColor)
+                {
+                    <p>@item</p>
+                }
+            }
+        </dd>*@
+        <dt>
+            Size :  @{
+                foreach (var item in ViewBag.listFindSize)
+                {
+                    @item
+                }
+            }
+        </dt>
+
+        @*<dd>
+            @{
+                foreach (var item in ViewBag.listFindSize)
+                {
+                    <p>@item</p>
+                }
+            }
+        </dd>*@
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.ProductImageId) :  @Html.DisplayFor(model => model.ProductImageId)
+
+        </dt>
+
+       
+        <dt>
+
+            Hình ảnh : 
+
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.ProductImageId)*@
+            @*<img src="@" /Data/Products/" + item.Id + "/" + item.ProductImage.ImageUrl" style="width:200px" />
+            <img src="@Url.Content(Model.ProductImages.)" style="height:80px;width:80px;margin:5px" id="previewImage" />*@
+            @{
+                string src = "";
+
+                if (Model.ProductImageId != null)
+                {
+                    src = "/Data/Products/" + Model.Id + "/" + Model.ProductImage.ImageUrl;
+                }
+                else
+                {
+                    src = "https://www.viettablet.com/images/companies/1/anh3/galaxy-s7-edge-01.jpg";
+                }
+                <img src="@src" style="width:200px" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate) : @Html.DisplayFor(model => model.CreatedDate)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy) : @Html.DisplayFor(model => model.TbUser.FullName)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.TbUser.FullName)
+        </dd>*@
+
+        <dt>
+            Status : @Html.DisplayFor(model => model.StatusProduct.StatusName)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.StatusProduct.StatusName)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
